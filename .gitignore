@@ -2,3 +2,7 @@
 /shelf/
 /.idea
 /target
+.classpath
+.project
+.settings/
+.vscode/
