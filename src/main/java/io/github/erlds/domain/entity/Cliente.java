@@ -20,7 +20,7 @@ public class Cliente {
     private String nome;
 
     // Atributo necessário para o mapeamento
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private Set<Pedido> pedidos;
 
     public Cliente() {
