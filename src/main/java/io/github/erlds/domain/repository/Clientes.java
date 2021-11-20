@@ -1,4 +1,4 @@
-package io.github.erlds.domain.repositorio;
+package io.github.erlds.domain.repository;
 
 import io.github.erlds.domain.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;

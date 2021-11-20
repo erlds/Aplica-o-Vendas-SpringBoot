@@ -2,7 +2,7 @@ package io.github.erlds;
 
 
 import io.github.erlds.domain.entity.Cliente;
-import io.github.erlds.domain.repositorio.Clientes;
+import io.github.erlds.domain.repository.Clientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
