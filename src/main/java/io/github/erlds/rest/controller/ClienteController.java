@@ -1,21 +1,35 @@
 package io.github.erlds.rest.controller;
 
+import io.github.erlds.domain.entity.Cliente;
+import io.github.erlds.domain.repository.Clientes;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 // Gerenciado pelo container de injeção de dependencias do spring
 @Controller
-// Toda requisição que for para esse endpoint cai nesse controller
-@RequestMapping("/api/clientes")
 public class ClienteController {
 
-    @RequestMapping(value = "/hello/{nome}", method = RequestMethod.GET)
+    private Clientes clientes;
+
+    public ClienteController (Clientes clientes){
+        this.clientes = clientes;
+    }
+
+    // Se o nome do parametro for diferente do nome na propriedade, deve-se adicionar esse nome
+    // como valor em PathVariable
+    @GetMapping("/api/clientes/{id}")
     @ResponseBody
-    public String helloCliente(@PathVariable("nome") String nomeCliente){
-        return String.format("Hello %s ", nomeCliente);
+    public ResponseEntity getClienteById(@PathVariable Integer id){
+        Optional<Cliente> cliente = clientes.findById(id);
+
+        if(cliente.isPresent()){
+            return ResponseEntity.ok(cliente.get());
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
 
