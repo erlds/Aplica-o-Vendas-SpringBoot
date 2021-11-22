@@ -2,6 +2,7 @@ package io.github.erlds.rest.controller;
 
 import io.github.erlds.domain.entity.Cliente;
 import io.github.erlds.domain.repository.Clientes;
+import jdk.nashorn.internal.codegen.ClassEmitter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,19 @@ public class ClienteController {
         }
 
         return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/api/clientes/{id}")
+    @ResponseBody
+    public ResponseEntity update(@PathVariable Integer id,
+                                 @RequestBody Cliente cliente){
+        return clientes
+                .findById(id)
+                .map( clienteExistente -> {
+                    cliente.setId(clienteExistente.getId());
+                    clientes.save(cliente);
+                    return ResponseEntity.noContent().build();
+                }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
