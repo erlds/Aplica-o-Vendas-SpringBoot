@@ -2,17 +2,13 @@ package io.github.erlds.rest.controller;
 
 import io.github.erlds.domain.entity.Cliente;
 import io.github.erlds.domain.repository.Clientes;
-import jdk.nashorn.internal.codegen.ClassEmitter;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 // Gerenciado pelo container de injeção de dependencias do spring (@Controller)
 // A annotation RestController elimina a necessidade de incluir a annotation ResponseBody
