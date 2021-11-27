@@ -43,10 +43,10 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
 
-        List<ItemPedido> itensPedido = converterItens(pedido, dto.getItems());
+        List<ItemPedido> itensPedido = converterItens(pedido, dto.getItens());
         repository.save(pedido);
         itensPedidoRepository.saveAll(itensPedido);
-        pedido.setItems(itensPedido);
+        pedido.setItens(itensPedido);
         return pedido;
 
     }
