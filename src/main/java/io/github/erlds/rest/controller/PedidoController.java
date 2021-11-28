@@ -37,7 +37,7 @@ public class PedidoController {
     }
 
     @GetMapping("{id}")
-    public InformacoesPedidoDTO getById(Integer id){
+    public InformacoesPedidoDTO getById(@PathVariable Integer id){
         return service
                 .obterPedidoCompleto(id)
                 .map(p -> converter(p))
@@ -53,6 +53,7 @@ public class PedidoController {
                 .cpf(pedido.getCliente().getCpf())
                 .nomeCliente(pedido.getCliente().getNome())
                 .total(pedido.getTotal())
+                .status(pedido.getStatus().name())
                 .itens(converter(pedido.getItens()))
                 .build();
     }

@@ -4,6 +4,7 @@ import io.github.erlds.domain.entity.Cliente;
 import io.github.erlds.domain.entity.ItemPedido;
 import io.github.erlds.domain.entity.Pedido;
 import io.github.erlds.domain.entity.Produto;
+import io.github.erlds.domain.enums.StatusPedido;
 import io.github.erlds.domain.repository.Clientes;
 import io.github.erlds.domain.repository.ItensPedido;
 import io.github.erlds.domain.repository.Pedidos;
@@ -43,6 +44,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(dto.getTotal());
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itensPedido = converterItens(pedido, dto.getItens());
         repository.save(pedido);
