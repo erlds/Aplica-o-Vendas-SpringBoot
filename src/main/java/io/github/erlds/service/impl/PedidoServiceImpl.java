@@ -9,6 +9,7 @@ import io.github.erlds.domain.repository.Clientes;
 import io.github.erlds.domain.repository.ItensPedido;
 import io.github.erlds.domain.repository.Pedidos;
 import io.github.erlds.domain.repository.Produtos;
+import io.github.erlds.exception.PedidoNaoEncontradoException;
 import io.github.erlds.exception.RegraNegocioException;
 import io.github.erlds.rest.dto.ItemPedidoDTO;
 import io.github.erlds.rest.dto.PedidoDTO;
@@ -57,6 +58,17 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public Optional<Pedido> obterPedidoCompleto(Integer id) {
         return repository.findByIdFetchItens(id);
+    }
+
+    @Override
+    @Transactional
+    public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+        repository
+                .findById(id)
+                .map( pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return repository.save(pedido);
+                }).orElseThrow(()-> new PedidoNaoEncontradoException());
     }
 
     private List<ItemPedido> converterItens(Pedido pedido, List<ItemPedidoDTO> itens) {
