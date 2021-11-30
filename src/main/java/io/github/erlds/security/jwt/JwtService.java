@@ -1,4 +1,4 @@
-package io.github.erlds;
+package io.github.erlds.security.jwt;
 
 import io.github.erlds.domain.entity.Usuario;
 import io.jsonwebtoken.Claims;
