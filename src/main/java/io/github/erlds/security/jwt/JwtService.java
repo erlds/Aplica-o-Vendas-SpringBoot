@@ -17,7 +17,8 @@ import java.util.HashMap;
 @Service
 public class JwtService {
 
-    @Value("${security.jwt.expiracao}")
+    // Definicao hardcoded aqui porque por alguma razao o spring não injeta a variavel aqui
+    @Value("30")
     private String expiracao;
 
     @Value("{security.jwt.chave-assinatura}")
@@ -53,14 +54,14 @@ public class JwtService {
             LocalDateTime data =
                     dataExpiracao.toInstant().
                             atZone(ZoneId.systemDefault()).toLocalDateTime();
-            return LocalDateTime.now().isAfter(data);
+            return !LocalDateTime.now().isAfter(data);
         } catch (Exception e){
             return false;
         }
     }
 
     public String obterLoginUsuario(String token) throws ExpiredJwtException{
-        return obterClaims(token).getSubject();
+        return (String) obterClaims(token).getSubject();
     }
 
 }
