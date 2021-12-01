@@ -17,11 +17,10 @@ import java.util.HashMap;
 @Service
 public class JwtService {
 
-    // Definicao hardcoded aqui porque por alguma razao o spring não injeta a variavel aqui
-    @Value("30")
+    @Value("${security.jwt.expiracao}")
     private String expiracao;
 
-    @Value("{security.jwt.chave-assinatura}")
+    @Value("${security.jwt.chave-assinatura}")
     private String chaveAssinatura;
 
     public String gerarToken(Usuario usuario){
